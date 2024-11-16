@@ -32,6 +32,7 @@ set "audio_modules_path=%~dp0yt-dlp-downloads\settings\modules-audio.txt"
 set "audio_modules_path_exists=0"
 set "video_modules_path=%~dp0yt-dlp-downloads\settings\modules-video.txt"
 set "video_modules_path_exists=0"
+set "list_file=%~dp0list.txt"
 
 if exist "%audio_modules_path%" (
     set "audio_modules_path_exists=1"
@@ -46,6 +47,8 @@ if "%audio_modules_path_exists%"=="1" (
         set "%%a"
     )
     echo Loaded audio settings from %audio_modules_path%
+) else (
+    echo Audio settings not found.
 )
 
 if "%video_modules_path_exists%"=="1" (
@@ -53,16 +56,13 @@ if "%video_modules_path_exists%"=="1" (
         set "%%a"
     )
     echo Loaded video settings from %video_modules_path%
+) else (
+    echo Video settings not found.
 )
-
-
-REM List file
-set "list_file=%~dp0list.txt"
 
 REM Check if the list file exists
 if not exist "%list_file%" (
-    REM create the list file
-    echo. > "%list_file%"
+    type nul > "%list_file%"
     echo Created list file: %list_file%
 )
 
